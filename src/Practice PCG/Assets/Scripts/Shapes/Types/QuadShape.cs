@@ -38,7 +38,7 @@ public class QuadShape : PredefinedShape
 		triangle.Resize(2);
 	}
 
-	public QuadShape SetParameters(ref List<Vector3> vert, Vector3 offset, int length, int width)
+	public QuadShape SetParameters(List<Vector3> vert, Vector3 offset, int length, int width)
 	{
 		_verts  = vert;
 		_offset = offset;
@@ -123,9 +123,9 @@ public class PredefinedShapeBuilder<T> where T : PredefinedShape
 	{
 		foreach (var parameter in parameters)
 			parameter?.Invoke(Shape);
-		
+
 		Shape.CreateShape();
-		
+
 		if (options == null) return Shape;
 		var shapeOption = new PredefinedShapeOptions<T>(Shape);
 		foreach (var option in options)

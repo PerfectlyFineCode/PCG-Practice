@@ -22,7 +22,8 @@ public class PlaneGridMesh : Shape
 		for (var col = 0; col < 10; col++)
 			PredefinedShape
 				.Create<QuadShape>()
-				.AddParameter(x => x.SetParameters(ref verts, new Vector3(row, 0f, col), 1, 1))
+				.AddParameter(
+					x => x.SetParameters(verts, new Vector3(row, 0f, col) - new Vector3(5f, 0f, 5f), 1, 1))
 				.Build()
 				.Combine(ref triangle, ref verts);
 

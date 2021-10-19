@@ -21,13 +21,27 @@ public class CubeMesh : Shape
 		var verts    = new List<Vector3>();
 		var triangle = new Triangle(6);
 
-		for (var i = 0; i < 6; i++)
+		for (var i = 0; i < 4; i++)
 			PredefinedShape
 				.Create<QuadShape>()
-				.AddOption(x => x.Rotate(Quaternion.Euler(90f, 0f, 0f)))
-				.AddParameter(x => x.SetParameters(ref verts, new Vector3(-0.5f, 0.5f, -0.5f), 1, 1))
+				.AddOption(x => x.Rotate(Quaternion.Euler(i * 90f, 0f, 0f)))
+				.AddParameter(x => x.SetParameters(verts, new Vector3(-0.5f, 0.5f, -0.5f), 1, 1))
 				.Build()
 				.Combine(ref triangle, ref verts);
+
+		PredefinedShape
+			.Create<QuadShape>()
+			.AddOption(x => x.Rotate(Quaternion.Euler(0f, 0f, 90f)))
+			.AddParameter(x => x.SetParameters(verts, new Vector3(-0.5f, 0.5f, -0.5f), 1, 1))
+			.Build()
+			.Combine(ref triangle, ref verts);
+
+		PredefinedShape
+			.Create<QuadShape>()
+			.AddOption(x => x.Rotate(Quaternion.Euler(90f, 90f, 0f)))
+			.AddParameter(x => x.SetParameters(verts, new Vector3(-0.5f, 0.5f, -0.5f), 1, 1))
+			.Build()
+			.Combine(ref triangle, ref verts);
 
 
 		mesh.vertices     = verts.ToArray();

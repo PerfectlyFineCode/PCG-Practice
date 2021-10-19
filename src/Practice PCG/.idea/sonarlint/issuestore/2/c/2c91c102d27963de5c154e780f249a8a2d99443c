@@ -1,4 +1,6 @@
 
-Qcsharpsquid:S3903"-Move 'ShapeGenerator' into a named namespace.(êËáØ8ùÆÈÇ/
-mcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(”´”öıÿÿÿÿ8õŠäÈÇ/
-hcsharpsquid:S1104	"DMake this field 'private' and encapsulate it in a 'public' property.(€‚¡»8¦ôÃÉÇ/
+Qcsharpsquid:S3903	"-Move 'ShapeGenerator' into a named namespace.(êËáØ8ùÆÈÇ/
+mcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(”´”öıÿÿÿÿ8õŠäÈÇ/
+hcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(€‚¡»8¦ôÃÉÇ/
+ycsharpsquid:S3887"UUse an immutable collection or reduce the accessibility of the field(s) 'ShapeTypes'.(é”š–8ÅîúÁÉ/
+ycsharpsquid:S2386"UUse an immutable collection or reduce the accessibility of the field(s) 'ShapeTypes'.(é”š–8ÅîúÁÉ/

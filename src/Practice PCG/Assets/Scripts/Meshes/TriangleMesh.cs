@@ -15,20 +15,35 @@ public class TriangleMesh : Shape
 		{
 			name = "Triangle Mesh Shape"
 		};
+
 		var verts = new List<Vector3>
 		{
-			new Vector3(0, 1, 0),
-			new Vector3(1, 1, 0),
-			new Vector3(0.5f, 0, 0)
+			new Vector3(-0.5f, 1, 0),
+			new Vector3(0.5f, 1, 0),
+			new Vector3(0f, 0, 0)
 		};
+
+		var v = new[]
+		{
+			new Vector3(-0.5f, 1, 0),
+			new Vector3(0.5f, 1, 0),
+			new Vector3(0f, 0, 0)
+		};
+
+		var reverse = Quaternion.Euler(new Vector3(0f, 180f, 0f));
+
+		for (var i = 0; i < v.Length; i++) v[i] = reverse * v[i];
+
+		verts.AddRange(v);
 
 		var tris = new Triangle(verts.Count)
 		{
-			[0] = (0, 1, 2)
+			[0] = (0, 1, 2),
+			[1] = (2, 3, 4)
 		};
 
-		mesh.vertices = verts.ToArray();
-		mesh.triangles = tris;
+		mesh.vertices     = verts.ToArray();
+		mesh.triangles    = tris;
 		renderer.material = material;
 
 		mesh.RecalculateNormals();
