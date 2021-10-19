@@ -15,19 +15,19 @@ public class PlaneGridMesh : Shape
 		{
 			name = "Plane Grid Mesh"
 		};
-		var verts = new List<Vector3>();
+		var verts    = new List<Vector3>();
 		var triangle = new Triangle(10 * 10);
 
 		for (var row = 0; row < 10; row++)
 		for (var col = 0; col < 10; col++)
 			PredefinedShape
 				.Create<QuadShape>()
-				.SetParameters(ref verts, new Vector3(row, 0f, col), 1, 1)
+				.AddParameter(x => x.SetParameters(ref verts, new Vector3(row, 0f, col), 1, 1))
 				.Build()
 				.Combine(ref triangle, ref verts);
 
-		mesh.vertices = verts.ToArray();
-		mesh.triangles = triangle;
+		mesh.vertices     = verts.ToArray();
+		mesh.triangles    = triangle;
 		renderer.material = material;
 
 		mesh.RecalculateNormals();

@@ -1,0 +1,9 @@
+
+Qcsharpsquid:S3903"(Move 'QuadShape' into a named namespace.(º¦••şÿÿÿÿ8Í–›¼É/
+Rcsharpsquid:S39033".Move 'PredefinedShape' into a named namespace.(Ú¦¯’8Í–›¼É/
+Ycsharpsquid:S3903a"5Move 'PredefinedShapeBuilder' into a named namespace.(ƒåÄŠ8”‚Œ½É/
+Zcsharpsquid:S3903‰"5Move 'PredefinedShapeOptions' into a named namespace.(à‰ôÅ8šÆ½É/
+hcsharpsquid:S11048"DMake this field 'private' and encapsulate it in a 'public' property.(É°á¾8¤¯¼É/
+tcsharpsquid:S38875"RUse an immutable collection or reduce the accessibility of the field(s) 'normals'.(ÉóüÌúÿÿÿÿ
+vcsharpsquid:S38876"MUse an immutable collection or reduce the accessibility of the field(s) 'uv'.(ÿµˆúÿÿÿÿ8Í–›¼É/
+wcsharpsquid:S38877"SUse an immutable collection or reduce the accessibility of the field(s) 'vertices'.(¢Üå8«¼®¼É/

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class QuadShape : PredefinedShape
@@ -8,7 +9,7 @@ public class QuadShape : PredefinedShape
 	private List<Vector3> _verts = new List<Vector3>();
 	private float _width;
 
-	public override PredefinedShape Build()
+	protected internal override void CreateShape()
 	{
 		vertices.Add(new Vector3(0f, 0f, 0f) + _offset);
 		uv.Add(new Vector2(0f, 0f));
@@ -26,11 +27,10 @@ public class QuadShape : PredefinedShape
 		uv.Add(new Vector2(1f, 0f));
 		normals.Add(Vector3.up);
 
-		int baseIndex = vertices.Count + _verts.Count - 4;
+		var baseIndex = vertices.Count + _verts.Count - 4;
 
 		triangle[0] = (baseIndex, baseIndex + 1, baseIndex + 2);
 		triangle[1] = (baseIndex, baseIndex + 2, baseIndex + 3);
-		return this;
 	}
 
 	protected override void OnConfigure()
@@ -40,10 +40,10 @@ public class QuadShape : PredefinedShape
 
 	public QuadShape SetParameters(ref List<Vector3> vert, Vector3 offset, int length, int width)
 	{
-		_verts = vert;
+		_verts  = vert;
 		_offset = offset;
 		_length = length;
-		_width = width;
+		_width  = width;
 		return this;
 	}
 }
@@ -53,20 +53,18 @@ public class PredefinedShape
 	public readonly List<Vector3> normals;
 	public readonly List<Vector2> uv;
 	public readonly List<Vector3> vertices;
-
 	public Triangle triangle;
 
 	protected PredefinedShape()
 	{
 		triangle = new Triangle(1);
 		vertices = new List<Vector3>();
-		normals = new List<Vector3>();
-		uv = new List<Vector2>();
+		normals  = new List<Vector3>();
+		uv       = new List<Vector2>();
 	}
 
-	public virtual PredefinedShape Build()
+	protected internal virtual void CreateShape()
 	{
-		return this;
 	}
 
 	protected virtual void OnConfigure()
@@ -88,10 +86,67 @@ public class PredefinedShape
 		Vertices.AddRange(vertices);
 	}
 
-	public static T Create<T>() where T : PredefinedShape, new()
+	public static PredefinedShapeBuilder<T> Create<T>() where T : PredefinedShape, new()
 	{
 		var shape = new T();
 		shape.OnConfigure();
-		return shape;
+		return new PredefinedShapeBuilder<T>(shape);
+	}
+}
+
+public class PredefinedShapeBuilder<T> where T : PredefinedShape
+{
+	private readonly T Shape;
+	private readonly List<Action<PredefinedShapeOptions<T>>> options;
+	private readonly List<Action<T>> parameters;
+
+	public PredefinedShapeBuilder(T shape)
+	{
+		Shape      = shape;
+		options    = new List<Action<PredefinedShapeOptions<T>>>();
+		parameters = new List<Action<T>>();
+	}
+
+	public PredefinedShapeBuilder<T> AddOption(Action<PredefinedShapeOptions<T>> option)
+	{
+		options.Add(option);
+		return this;
+	}
+
+	public PredefinedShapeBuilder<T> AddParameter(Action<T> parameter)
+	{
+		parameters.Add(parameter);
+		return this;
+	}
+
+	public T Build()
+	{
+		foreach (var parameter in parameters)
+			parameter?.Invoke(Shape);
+		
+		Shape.CreateShape();
+		
+		if (options == null) return Shape;
+		var shapeOption = new PredefinedShapeOptions<T>(Shape);
+		foreach (var option in options)
+			option?.Invoke(shapeOption);
+		return Shape;
+	}
+}
+
+public class PredefinedShapeOptions<T> where T : PredefinedShape
+{
+	private T Shape { get; }
+
+	public PredefinedShapeOptions<T> Rotate(Quaternion quaternion)
+	{
+		for (var i = 0; i < Shape.vertices.Count; i++) Shape.vertices[i] = quaternion * Shape.vertices[i];
+		return this;
+	}
+
+
+	public PredefinedShapeOptions(T _shape)
+	{
+		Shape = _shape;
 	}
 }
