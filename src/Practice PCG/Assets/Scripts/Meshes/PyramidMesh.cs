@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[ShowShape("Pyramide")]
-public class PyramideMesh : Shape
+[ShowShape("Pyramid")]
+public class PyramidMesh : Shape
 {
-	public PyramideMesh(MeshFilter _filter, MeshRenderer _renderer, Material _material) : base(_filter, _renderer,
+	public PyramidMesh(MeshFilter _filter, MeshRenderer _renderer, Material _material) : base(_filter, _renderer,
 		_material)
 	{
 	}
@@ -13,7 +13,7 @@ public class PyramideMesh : Shape
 	{
 		filter.mesh = mesh = new Mesh
 		{
-			name = "Pyramide Mesh Shape"
+			name = "Pyramid Mesh Shape"
 		};
 
 
@@ -25,14 +25,17 @@ public class PyramideMesh : Shape
 			var index = i;
 			PredefinedShape
 				.Create<TriangleShape>()
-				.AddParameter(x => x.SetParameters(verts, new Vector3(0f, 0f, 0f), 1))
-				.AddOption(x => x.Rotate(Quaternion.Euler(new Vector3(30f, 90f * index, 180f))))
+				.AddParameter(x => x.SetParameters(verts,
+					new Vector3(0f, 0f, 0f), 1, 1f / 1.269f))
+				.AddOption(x => x.Rotate(
+					Quaternion.Euler(new Vector3(52f, 90f * index, 180f))))
 				.Build()
 				.Combine(ref triangle, ref verts);
 		}
 
 		PredefinedShape.Create<QuadShape>()
-			.AddParameter(x => x.SetParameters(verts, new Vector3(-0.5f, 0.866f, -0.5f), 1, 1))
+			.AddParameter(x => x.SetParameters(verts, new Vector3(-0.5f, 0.866f, -0.5f),
+				1, 1))
 			.AddOption(x => x.Rotate(Quaternion.Euler(180f, 0f, 0f)))
 			.Build()
 			.Combine(ref triangle, ref verts);
