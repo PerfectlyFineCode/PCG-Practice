@@ -38,7 +38,7 @@ public class QuadShape : PredefinedShape
 		triangle.Resize(2);
 	}
 
-	public QuadShape SetParameters(List<Vector3> vert, Vector3 offset, int length, int width)
+	public QuadShape SetParameters(List<Vector3> vert, Vector3 offset, float length, float width)
 	{
 		_verts  = vert;
 		_offset = offset;

@@ -20,6 +20,8 @@ public class PyramidMesh : Shape
 		var verts    = new List<Vector3>();
 		var triangle = new Triangle(4);
 
+		var height = 0.5f;
+
 		for (var i = 0; i < 4; i++)
 		{
 			var index = i;
@@ -33,9 +35,11 @@ public class PyramidMesh : Shape
 				.Combine(ref triangle, ref verts);
 		}
 
+		var size = new Vector2(1.576f, 1.576f);
+
 		PredefinedShape.Create<QuadShape>()
-			.AddParameter(x => x.SetParameters(verts, new Vector3(-0.5f, 0.866f, -0.5f),
-				1, 1))
+			.AddParameter(x => x.SetParameters(verts, new Vector3(-size.x / 2, 0.61566f, -size.y / 2),
+				size.x, size.y))
 			.AddOption(x => x.Rotate(Quaternion.Euler(180f, 0f, 0f)))
 			.Build()
 			.Combine(ref triangle, ref verts);

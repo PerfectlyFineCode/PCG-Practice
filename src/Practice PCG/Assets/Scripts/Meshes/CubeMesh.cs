@@ -25,21 +25,27 @@ public class CubeMesh : Shape
 			PredefinedShape
 				.Create<QuadShape>()
 				.AddOption(x => x.Rotate(Quaternion.Euler(i * 90f, 0f, 0f)))
-				.AddParameter(x => x.SetParameters(verts, new Vector3(-0.5f, 0.5f, -0.5f), 1, 1))
+				.AddParameter(x => x.SetParameters(verts,
+					new Vector3(-0.5f, 0.5f, -0.5f),
+					1, 1))
 				.Build()
 				.Combine(ref triangle, ref verts);
 
 		PredefinedShape
 			.Create<QuadShape>()
 			.AddOption(x => x.Rotate(Quaternion.Euler(0f, 0f, 90f)))
-			.AddParameter(x => x.SetParameters(verts, new Vector3(-0.5f, 0.5f, -0.5f), 1, 1))
+			.AddParameter(x => x.SetParameters(verts,
+				new Vector3(-0.5f, 0.5f, -0.5f),
+				1, 1))
 			.Build()
 			.Combine(ref triangle, ref verts);
 
 		PredefinedShape
 			.Create<QuadShape>()
 			.AddOption(x => x.Rotate(Quaternion.Euler(90f, 90f, 0f)))
-			.AddParameter(x => x.SetParameters(verts, new Vector3(-0.5f, 0.5f, -0.5f), 1, 1))
+			.AddParameter(x => x.SetParameters(verts,
+				new Vector3(-0.5f, 0.5f, -0.5f),
+				1, 1))
 			.Build()
 			.Combine(ref triangle, ref verts);
 
